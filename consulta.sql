@@ -1,5 +1,7 @@
+-- Crear la base de datos: 
 
-CREATE DATABASE banco
+CREATE DATABASE banco;
+
 
 -- crear tabla de transferencia
 CREATE TABLE transferencias (
@@ -13,7 +15,8 @@ CREATE TABLE transferencias (
 -- crear tabla cuentas
 CREATE TABLE cuentas (id INT, saldo DECIMAL CHECK (saldo >= 0));
 
--- insertar valores en cuenta 1 y cuenta 2
+
+-- insertar valores para cuenta 1 y cuenta 2
 INSERT INTO cuentas
 values (1, 20000);
 INSERT INTO cuentas
