@@ -1,11 +1,14 @@
 const pool = require("./dbconfig");
 
 const consulta = async ({ cuenta }) => {
-    const { rows } = await pool.query(
-      `select * from transferencias where cuenta_origen = ${cuenta} ORDER BY fecha DESC LIMIT 10;`
-    );
+    const query = {
+        rowMode: "array",
+        text: `select * from transferencias where cuenta_origen = ${cuenta} ORDER BY fecha DESC LIMIT 10;`,
+    }; 
+
+    const rows  = await pool.query(query);
     console.log(` Las ultimas 10 transferencias de la cuenta ${cuenta} son:`);
-    console.log(rows);
+    console.log(rows.rows);
 };
 
 const consultaSaldo = async ({ cuenta }) => {
