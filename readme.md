@@ -30,78 +30,54 @@ Lista de software y herramientas, incluyendo versiones, que necesitas para insta
 
 ### Instalación 🔧
 
-Para utilizar este proyecto debes clonar este repositorio en tu máquina, utilizando git.
+1. Para utilizar este proyecto debes clonar este repositorio en tu máquina, utilizando git.
 
 ```
 git clone git@github.com:jesbell/alwaysMusic.git
 ```
 
-Una vez allí puedes abrir el proyecto donde te sea más comodo. Pero dentro de la carpeta del proyecto deberas realizar las instalación de las dependencias, con el siguiente comando.
+2. Una vez allí puedes abrir el proyecto donde te sea más comodo. Pero dentro de la carpeta del proyecto deberas realizar las instalación de las dependencias, con el siguiente comando.
 
 ```
 npm install
 ```
 
-También debes crear la base de datos correspondiente que esta utilizando este proyecto y su tabla estudiantes. Dichas consultas se encuentran en el archivo consulta.sql.
+3. Debes crear la base de datos correspondiente que esta utilizando este proyecto y sus tablas. Dichas consultas se encuentran en el archivo consulta.sql. Desdes realizar esas instrucciones indicadas, para generar la base de datos y tablas que utiliza este proyecto, son dos tablas.
 
-Crea la base datos: 
-```
-CREATE DATABASE banco
-```
-Y crea las dos tablas: 
-```
-// !!! El rut es la PRIMARY KEY
-CREATE TABLE estudiantes (
-    Rut VARCHAR(12) PRIMARY KEY,
-    Nombre VARCHAR(255) NOT NULL,
-    Curso VARCHAR(50) NOT NULL,
-    Nivel INT NOT NULL
-); 
-```
-
-El siguiente paso es hacer la conexión a la base de datos. En el archivo dbConfig.js debes agregar tu usuario y contraseña, y el nombre de la base de datos que creaste si la creaste con un nombre distinto.
+4. El siguiente paso es hacer la conexión a la base de datos. En el archivo dbconfig.js debes agregar tu usuario y contraseña.
 ```
 // inserta tus datos
 const usuario_name = "";
 const pass_usuario = "";
 ```
-
-``` 
-// el nombre por defecto de la base datos, 
-// puedes cambiarlo por el nombre que tu hayas creado.
-const config = {
-    ...
-    database: "alwaysmusic",
-    ...
-};
+5. Finalmente, para utilizar el proyecto, se debe usar en consola con sus respetivas instrucciones, el formato principal es el siguiente:
+   
+```
+node index.js <tipo_transaccion> <cuenta_origen> <fecha> <descripcion> <monto> <cuenta_destino>
 ```
 
-En el archivo basededato.sql, puedes encontrar también unos insert para que tengas datos para comprobar la primera consulta. 
-Si realizas esos insert, entonces en tu consola ingresa lo siguiente:
+En <tipo_transaccion> puedes colocar: nueva o consulta, o consulta-saldo.
+
+5.1. La instrucción nueva: Lo que realiza esta instruscción es realizar una transferencia de una cuenta a otra 
+- cuenta_origen: el numero de la cuenta.
+- fecha: es un string.
+- Descripción: una pequeña descripción..
+- monto: la cantidad de dinero a transferir.
+- cuenta_destino: el numero de la cuenta destino.
+
+Por ejemplo: Aquí hay una transferecia de cuenta 1 a cuenta 2.
+```
+node index.js nueva 1 "16/10/2020" "Empanadas para el 18" 30000 2
+```
+5.2. La instrucción consulta: nos entrega las últimas 10 transferencia de la cuenta.
+Por ejemplo:
 
 ```
-node index.js consulta
+node index.js consulta 1
 ```
-Y debería darte como resultado todos los estudiantes y sus datos que existen en tabla estudiantes.
-
-Puedes utilizar otros comandos de la siguiente manera:
-
-Para Crear:
-``````
-node index.js nuevo "bryan May" "19.456.785-8" guitarra 7
-node index.js nuevo "Jusef May" "19.356.775-k" violin  8
-``````
-Para Editar:
+5.3 La instrucción consulta-saldo: devuelve el saldo de la cuenta.
 ```
-node index.js editar "bryan May" "19.456.785-8" guitarra 9
-```
-Para consultar por rut:
-```
-node index.js rut "98.765.432-1"
-```
-Para eliminar estudiante por rut:
-```
-node index.js eliminar "19.356.775-k"
+node index.js consulta-saldo 1
 ```
 
 
