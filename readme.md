@@ -12,7 +12,7 @@ Este proyecto se puede visualizar en el terminal, para este caso debe ingresar l
 
 | Nueva Transacción | Consulta y consulta saldo |
 | --- | --- |
-| ![Visualización](/assets/visual_1.png)| ![Visualización_dos](/assets/visual_2.png) |
+| ![nueva](/assets/consulta%20nueva.png)| ![Visualización_dos](/assets/consulta.png) ![Visualización_dos](/assets/consultasaldo.png) |
 
 
 
