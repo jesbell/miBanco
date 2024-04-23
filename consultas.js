@@ -1,4 +1,4 @@
-const pool = require("./dbConfig");
+const pool = require("./dbconfig");
 
 const consulta = async ({ cuenta }) => {
     const { rows } = await pool.query(

@@ -9,7 +9,7 @@ const descripcion = argumentos[3];
 const monto = argumentos[4];
 const cuentaDestino = argumentos[5];
 
-(async () => {
+/* (async () => {
   try {
     await funciones[tipo_transaccion]({
       cuenta,
@@ -24,6 +24,35 @@ const cuentaDestino = argumentos[5];
     pool.end();
   }
 })();
+ */
+
+(async () => {
+  try {
+    switch (tipo_transaccion) {
+      case "nueva":
+        await nueva({
+          descripcion,
+          fecha,
+          monto,
+          cuenta,
+          cuentaDestino,
+        });
+        break;
+      case "consulta":
+        await consulta({ cuenta });
+        break;
+      case "consulta-saldo":
+        await consultaSaldo({ cuenta });
+        break;
+      default:
+        console.log("Operación no válida");
+    }
+  } catch (error) {
+    console.log("Error", error);
+  } finally {
+    process.exit();
+  }
+})();
 
 /*
     -----------
@@ -36,7 +65,7 @@ const cuentaDestino = argumentos[5];
     EJEMPLOS:
 
     Nueva transacción:
-    node index.js nueva 1 "16/10/2020" "Empanadas para el 18" 30000
+    node index.js nueva 1 "16/10/2020" "Empanadas para el 18" 30000 2
 
 
     Consulta de últimas transferencias para la cuenta 1
